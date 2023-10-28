@@ -1,18 +1,29 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\diarioController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
-Route::get('/', function () {
-    return view('welcome');
-});
+/* Route::get('/', [diarioController::class, 'metodoInicio'])->name('apodoInicio');
+
+Route::get('/formularios', [diarioController::class, 'metodoFormularios'])->name('apodoFormularios');
+
+Route::get('/recuerdos', [diarioController::class, 'metodoRecuerdos'])->name('apodoRecuerdos');
+ */
+
+    Route::controller(diarioController ::class)->group(function(){
+
+    Route::get('/', 'metodoInicio')->name('apodoInicio');
+    Route::get('/formulario', 'metodoFormulario')->name('apodoFormulario');
+    Route::get('/recuerdos', 'metodoRecuerdos')->name('apodoRecuerdos');
+    Route::post('/guardarRecuerdo', [diarioController::class, 'metodoGuardar'])->name('Guardar');
+}
+);
+
+
+
+/* Route::view('/', 'welcome');
+
+Route::view('/formularios', 'formularios');
+
+Route::view('/recuerdos', 'recuerdos'); */
